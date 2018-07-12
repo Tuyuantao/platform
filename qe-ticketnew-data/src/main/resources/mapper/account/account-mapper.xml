@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ticketnew.qe.mapper.account.AccountMapper">
+    <select id="selectAccountById" resultType="com.ticketnew.qe.dto.AccountDO">
+        select * from ac_account where id = #{id}
+    </select>
+
+    <select id="selectAccountByUserId" resultType="com.ticketnew.qe.dto.AccountDO">
+        select * from ac_account where user_id = #{userId}
+    </select>
+
+    <select id="selectAccountByExtUserId" resultType="com.ticketnew.qe.dto.AccountDO">
+    select * from ac_account where ext_user_id = #{extUserId}
+  </select>
+
+    <select id="selectAccountByMobile" resultType="com.ticketnew.qe.dto.AccountDO">
+        select * from ac_account where mobile = #{mobile}
+    </select>
+
+    <select id="selectAccountByTradeMobile" resultType="com.ticketnew.qe.dto.AccountDO">
+        select * from ac_account where trade_mobile = #{tradeMobile}
+    </select>
+
+    <select id="selectAccountByEmail" resultType="com.ticketnew.qe.dto.AccountDO">
+        select * from ac_account where email = #{email}
+    </select>
+
+    <update id="updateItemToUnverifiedMobileWithoutThirdEmail">
+        update ac_account set mobile = NULL ,mobile_verified = 0, google_email = NULL ,google_user_id = NULL ,google_user_name = NULL ,
+        facebook_email = NULL ,facebook_user_id = NULL, facebook_user_name = NULL where id = #{id}
+    </update>
+
+    <insert id="insertAccount" parameterType="com.ticketnew.qe.dto.AccountDO"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into ac_account (
+          gmt_create,
+          gmt_modified,
+          user_id,
+          ext_user_id,
+          password,
+          token,
+          mobile,
+          trade_mobile,
+          mobile_verified,
+          email,
+          trade_email,
+          email_verified,
+          avatar_url,
+          last_name,
+          first_name,
+          nick_name,
+          birth_date,
+          address1,
+          address2,
+          city,
+          postcode,
+          state,
+          gender,
+          google_email,
+          google_user_id,
+          google_user_name,
+          facebook_email,
+          facebook_user_id,
+          facebook_user_name,
+          source,
+          register_time,
+          register_region_id,
+          register_source,
+          is_new,
+          push_switch,
+          firebase_token,
+          last_login_device,
+          device_id,
+          platform,
+          channel,
+          version,
+          env
+        )
+        values (
+          #{gmt_create,jdbcType=TIMESTAMP}},
+          #{gmt_modified,jdbcType=TIMESTAMP},
+          #{user_id,jdbcType=VARCHAR},
+          #{ext_user_id,jdbcType=VARCHAR},
+          #{password,jdbcType=VARCHAR},
+          #{token,jdbcType=VARCHAR},
+          #{mobile,jdbcType=VARCHAR},
+          #{trade_mobile,jdbcType=VARCHAR},
+          #{mobile_verified,jdbcType=TINYINT},
+          #{email,jdbcType=VARCHAR},
+          #{trade_email,jdbcType=VARCHAR},
+          #{email_verified,jdbcType=TINYINT},
+          #{avatar_url,jdbcType=VARCHAR},
+          #{last_name,jdbcType=VARCHAR},
+          #{first_name,jdbcType=VARCHAR},
+          #{nick_name,jdbcType=VARCHAR},
+          #{birth_date,jdbcType=BIGINT},
+          #{address1,jdbcType=VARCHAR},
+          #{address2,jdbcType=VARCHAR},
+          #{city,jdbcType=VARCHAR},
+          #{postcode,jdbcType=VARCHAR},
+          #{state,jdbcType=VARCHAR},
+          #{gender,jdbcType=INTEGER},
+          #{google_email,jdbcType=VARCHAR},
+          #{google_user_id,jdbcType=VARCHAR},
+          #{google_user_name,jdbcType=VARCHAR},
+          #{facebook_email,jdbcType=VARCHAR},
+          #{facebook_user_id,jdbcType=VARCHAR},
+          #{facebook_user_name,jdbcType=VARCHAR},
+          #{source,jdbcType=VARCHAR},
+          #{register_time,jdbcType=TIMESTAMP},
+          #{register_region_id,jdbcType=VARCHAR},
+          #{register_source,jdbcType=VARCHAR},
+          #{is_new,jdbcType=TINYINT},
+          #{push_switch,jdbcType=INTEGER},
+          #{firebase_token,jdbcType=VARCHAR},
+          #{last_login_device,jdbcType=VARCHAR},
+          #{device_id,jdbcType=VARCHAR},
+          #{platform,jdbcType=VARCHAR},
+          #{channel,jdbcType=VARCHAR},
+          #{version,jdbcType=VARCHAR},
+          #{env,jdbcType=VARCHAR},
+          #{last_booked_date,jdbcType=TIMESTAMP}
+        )
+    </insert>
+</mapper>

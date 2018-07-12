@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ticketnew.qe.mapper.qa.UnavailableCinemaMapper">
+    <select id="selectAll" resultType="com.ticketnew.qe.dto.UnavailableCinemaDTO">
+        select * from qa_unavailable_cinema
+    </select>
+
+    <select id="getCountGroupByName" resultType="com.ticketnew.qe.dto.CinemaCountByNameDTO">
+        select cinema_name as cinemaName, count(*) as number from qa_unavailable_cinema
+        GROUP by cinema_name order by number DESC  limit 0, #{number}
+    </select>
+
+    <select id="getCountGroupByDate" resultType="com.ticketnew.qe.dto.CinemaCountByDateDTO">
+        select store_date as date, count(*) as number from qa_unavailable_cinema
+        GROUP by store_date order by store_date DESC  limit 0, #{number}
+    </select>
+
+    <select id="selectByDate" resultType="com.ticketnew.qe.dto.UnavailableCinemaDTO">
+        select * from qa_unavailable_cinema where date_format(store_date,"%Y-%m-%d %H:%i") = #{date}
+        order by region_name asc
+    </select>
+
+    <select id="selectByCinemaName" resultType="com.ticketnew.qe.dto.UnavailableCinemaDTO">
+        select * from qa_unavailable_cinema where cinema_name = #{cinemaName}
+        order by store_date desc
+    </select>
+
+</mapper>

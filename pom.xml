@@ -1,0 +1,161 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.ticketnew.qe</groupId>
+    <artifactId>qe-ticketnew-platform</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>qe-ticketnew-data</module>
+        <module>qe-ticketnew-user</module>
+        <module>qe-ticketnew-service</module>
+    </modules>
+    <packaging>pom</packaging>
+
+    <name>qe-ticketnew-platform</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <org.springboot.version>1.5.4.RELEASE</org.springboot.version>
+        <org.springboot.mybatis.version>1.3.0</org.springboot.mybatis.version>
+        <qe.ticketnew.version>1.0-SNAPSHOT</qe.ticketnew.version>
+        <org.myslq.version>6.0.5</org.myslq.version>
+        <google.gson.version>2.8.0</google.gson.version>
+        <google.guava.version>19.0</google.guava.version>
+        <redis.clients.version>2.9.0</redis.clients.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- module -->
+            <dependency>
+                <groupId>com.ticketnew.qe</groupId>
+                <artifactId>qe-ticketnew-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ticketnew.qe</groupId>
+                <artifactId>qe-ticketnew-data</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ticketnew.qe</groupId>
+                <artifactId>qe-ticketnew-user</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- spring boot -->
+
+            <dependency>
+                <!-- Import dependency management from Spring Boot -->
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${org.springboot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${org.springboot.mybatis.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>jcl-over-slf4j</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>jul-to-slf4j</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>log4j-over-slf4j</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <!-- second dependency-->
+            <dependency>
+                <groupId>com.ticketnew.qe</groupId>
+                <artifactId>qe-ticketnew-util</artifactId>
+                <version>${qe.ticketnew.version}</version>
+            </dependency>
+            <!-- third dependency -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${org.myslq.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>${google.gson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${google.guava.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${redis.clients.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.6.0</version>
+                    <!--<configuration>-->
+                        <!--<encoding>${project.build.sourceEncoding}</encoding>-->
+                        <!--<source>${java.version}</source>-->
+                        <!--<target>${java.version}</target>-->
+                    <!--</configuration>-->
+                </plugin>
+
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>versions-maven-plugin</artifactId>
+                    <version>2.2</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+    <distributionManagement>
+        <repository>
+            <id>snapshots</id>
+            <name>qe-ticketnew-base release repo</name>
+            <url>http://47.88.213.250:8081/nexus/content/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>qe-ticketnew-base snapshot repo</name>
+            <url>http://47.88.213.250:8081/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+</project>

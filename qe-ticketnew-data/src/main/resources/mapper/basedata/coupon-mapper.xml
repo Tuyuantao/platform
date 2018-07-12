@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ticketnew.qe.mapper.basedata.CouponMapper">
+    <select id="selectCouponByPromotionId" resultType="com.ticketnew.qe.dto.CouponDO">
+        select * from promo_coupon where promotion_id = #{promotionId}
+    </select>
+
+    <insert id="insert" parameterType="java.util.List">
+        insert into promo_coupon (
+        promotion_id,
+        lottery_id,
+        coupon_code,
+        start_time,
+        end_time,
+        repeatable,
+        period,
+        repeat_times,
+        creator,
+        last_modifier,
+        is_draw,
+        draw_user,
+        valid_draw_date
+        )
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.promotion_id,jdbcType=BIGINT},
+            #{item.lottery_id,jdbcType=BIGINT},
+            #{item.coupon_code,jdbcType=VARCHAR},
+            #{item.start_time,jdbcType=TIMESTAMP},
+            #{item.end_time,jdbcType=TIMESTAMP},
+            #{item.repeatable,jdbcType=TINYINT},
+            #{item.period,jdbcType=VARCHAR},
+            #{item.repeat_times,jdbcType=INTEGER},
+            #{item.creator,jdbcType=VARCHAR},
+            #{item.last_modifier,jdbcType=VARCHAR},
+            #{item.is_draw,jdbcType=TINYINT},
+            #{item.draw_user,jdbcType=VARCHAR},
+            #{item.valid_draw_date,jdbcType=VARCHAR}
+            )
+        </foreach>
+    </insert>
+</mapper>
